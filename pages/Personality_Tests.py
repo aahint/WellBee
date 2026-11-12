@@ -22,7 +22,7 @@ else:
     user_email = st.session_state['user_email']
 
 # File path to Lottie animation
-lottie_path = "/home/thania/Downloads/Joshi/Joshi/anime/personality.json"
+lottie_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "anime", "personality.json")
 # Function to load Lottie animation
 def load_lottiefile(filepath: str):
     """Loads a Lottie animation from a JSON file."""
@@ -520,7 +520,6 @@ if st.session_state['current_test'] is None:
     This test is widely used for personal development, career guidance, and improving interpersonal relationships.
     Take this test to understand your personality type and how it influences your behavior.
     """)
-    st.image("/home/thania/Downloads/Set of MBTI person types_ Socionics mbti. Personality test. Mind behavior concept. Flat vector illustration",width=200 )
     if st.button("Start MBTI Test", key="start_mbti"):
             st.session_state['current_test'] = "MBTI Personality Test"
             st.session_state['questions_answered'] = 0
@@ -535,7 +534,6 @@ if st.session_state['current_test'] is None:
     This test helps you understand how you score on each dimension and what it means for your behavior and preferences.
     Use this test to gain insights into your personality traits and how they affect your interactions with others.
     """)
-    st.image("/home/thania/Downloads/The Big 5 OCEAN Traits Explained - Personality Quizzes.jpeg",width=200)
     if st.button("Start OCEAN Test", key="start_ocean"):
             st.session_state['current_test'] = "Big Five (OCEAN)"
             st.session_state['questions_answered'] = 0
@@ -550,7 +548,6 @@ if st.session_state['current_test'] is None:
     This test helps you understand how you approach tasks, interact with others, and respond to challenges.
     Take this test to learn more about your behavioral tendencies and how to leverage them effectively.
     """)
-    st.image("/home/thania/Downloads/DiSC Personality Test Guide.jpeg", width=200)
     if st.button("Start DISC Test", key="start_disc"):
             st.session_state['current_test'] = "DISC Assessment"
             st.session_state['questions_answered'] = 0

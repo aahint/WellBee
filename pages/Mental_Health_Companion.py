@@ -12,7 +12,7 @@ import json
 import os
 
 # File path to Lottie animation
-lottie_path = "/home/thania/Downloads/Joshi/Joshi/anime/help.json"
+lottie_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "anime", "help.json")
 
 # Function to load Lottie animation
 def load_lottiefile(filepath: str):

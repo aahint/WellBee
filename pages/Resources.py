@@ -26,8 +26,8 @@ else:
     user_email = st.session_state['user_email']
 
 # Load animation and image
-lottie_yoga = load_lottiefile("/home/thania/Downloads/Joshi/Joshi/anime/yogadog.json")  
-yoga_image = "/home/thania/Downloads/stretching.jpeg" 
+lottie_yoga = load_lottiefile(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "anime", "yogadog.json"))  
+yoga_image = None  # optional: path to a local image
 
 # Create columns for title and visuals
 col1, col2, col3 = st.columns([2, 1, 1])
@@ -38,7 +38,8 @@ with col1:
 
 # Add image in the second column
 with col2:
-    st.image(yoga_image, width=200)
+    if yoga_image:
+        st.image(yoga_image, width=200)
 
 # Add animation in the third column
 with col3:
@@ -602,7 +603,7 @@ with tab1:
                 """)
                 
                 # File path to Lottie animation
-                lottie_path = "/home/thania/Downloads/Joshi/Joshi/anime/yoga.json"
+                lottie_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "anime", "yoga.json")
 
                 lottie_coding = load_lottiefile(lottie_path)
                 if lottie_coding:
@@ -673,7 +674,7 @@ with tab1:
 with tab2:
     col1, col2 = st.columns([2, 1])
 
-    lottie_path = "/home/thania/Downloads/Joshi/Joshi/anime/meditation.json"
+    lottie_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "anime", "meditation.json")
     lottie_coding = load_lottiefile(lottie_path)
 
     # Add title in the first column
@@ -699,19 +700,19 @@ with tab2:
             "title": "5-Minute Mindful Breathing",
             "description": "A quick meditation to center yourself during a busy day.",
             "duration": "5 minutes",
-            "audio_url": "/home/thania/Downloads/WhatsApp Audio 2025-04-04 at 03.15.49.mpeg"
+            "audio_url": None
         },
         {
             "title": "Body Scan Meditation",
             "description": "Reduce physical tension with this progressive relaxation technique.",
             "duration": "15 minutes",
-            "audio_url": "/home/thania/Downloads/15 Minute Guided Meditation for Mindfulness.mp3"
+            "audio_url": None
         },
         {
             "title": "Loving-Kindness Meditation",
             "description": "Cultivate compassion for yourself and others with this heart-opening practice.",
             "duration": "20 minutes",
-            "audio_url": "/home/thania/Downloads/20 Minute Journey to Inner Peace & Deep Relaxation (Guided Meditation)_1.mp3"
+            "audio_url": None
         }
     ]
     
@@ -720,7 +721,10 @@ with tab2:
         st.markdown(audio['description'])
         st.markdown(f"Duration: {audio['duration']}")
         # Placeholder for audio player
-        st.audio(audio["audio_url"])
+        if audio["audio_url"]:
+            st.audio(audio["audio_url"])
+        else:
+            st.caption("Audio file not included in this repository.")
         st.markdown("---")
     
     # Video section for meditation
@@ -754,7 +758,7 @@ with tab2:
 with tab3:
     col1, col2 = st.columns([2, 1])
 
-    lottie_path = "/home/thania/Downloads/Joshi/Joshi/anime/animation.json"
+    lottie_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "anime", "animation.json")
     lottie_coding = load_lottiefile(lottie_path)
 
     # Add title in the first column
