@@ -1,10 +1,23 @@
 import os
+import bcrypt
 from dotenv import load_dotenv
 from db_connection import db_connection
 from datetime import datetime
 
 import requests
 import json
+
+
+def hash_password(password):
+    """Return a bcrypt hash to store in the users table instead of the plain password."""
+    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+
+
+def _password_matches(password, stored):
+    # bcrypt hashes start with "$2"; older accounts may still hold plain text
+    if stored.startswith("$2"):
+        return bcrypt.checkpw(password.encode("utf-8"), stored.encode("utf-8"))
+    return password == stored
 
 
 def authenticate_user(email, password):
@@ -16,8 +29,8 @@ def authenticate_user(email, password):
     user = cursor.fetchone()
     # print(user)
     if user:
-        # Check if the provided password matches the stored password
-        if user['password'] == password:
+        # Check the password (bcrypt hash, or legacy plain text)
+        if _password_matches(password, user['password']):
             # Update last login time if password matches
             current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             cursor.execute("UPDATE users SET last_login = %s WHERE email = %s", (current_time, email))
