@@ -1,6 +1,6 @@
 import streamlit as st
 from db_connection import db_connection
-from functions import authenticate_user
+from functions import authenticate_user, hash_password
 import datetime
 import re
 # Login page
@@ -78,7 +78,7 @@ def login_page():
                         else:
                         # Insert new user into database
                             cursor.execute("INSERT INTO users (email, password, created_at, last_login) VALUES (%s, %s, NOW(), NOW())",
-                                       (new_email, new_password))
+                                       (new_email, hash_password(new_password)))
                             conn.commit()
                             conn.close()
                             message = f'Account for {new_email} created successfully! Please log in.'
@@ -98,7 +98,6 @@ def logout_user():
     st.success("You have been logged out successfully")
     # Optional: Force a rerun to refresh the page
     #st.experimental_rerun()
-
 
 
 
