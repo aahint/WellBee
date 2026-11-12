@@ -6,8 +6,9 @@ CREATE TABLE users (
          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+-- Example user. Replace the password with a bcrypt hash made by hash_password() in functions.py
 INSERT INTO users (email, password, last_login, created_at,updated_at)
-VALUES ('vachansiddharth3@gmail.com', 'vachan@1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES ('demo@example.com', 'REPLACE_WITH_BCRYPT_HASH', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 CREATE TABLE user_journals (
     journal_id INT PRIMARY KEY AUTO_INCREMENT,  
